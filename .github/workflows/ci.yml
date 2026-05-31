@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  # Manual trigger for re-running on demand from the Actions tab
+  workflow_dispatch:
+
+# Cancel in-flight runs for the same ref when a new commit lands. Keeps the
+# Actions tab tidy and saves CI minutes during rapid pushes.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+# Read-only token by default; CI does no writes.
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    name: Lint, typecheck, build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    env:
+      # Production URL used by lib/seo.ts for absolute URLs in metadata,
+      # JSON-LD, sitemap, OG, etc. Override in repo settings → Variables
+      # → NEXT_PUBLIC_SITE_URL once the real domain is set.
+      NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL || 'https://saheedoladele.com' }}
+      NODE_ENV: test
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload Next.js build trace on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: next-build-trace
+          path: .next/trace
+          retention-days: 7
+          if-no-files-found: ignore

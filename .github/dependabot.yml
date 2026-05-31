@@ -1,0 +1,47 @@
+version: 2
+
+updates:
+  # npm dependencies — grouped so a typical Next.js release doesn't open
+  # five separate PRs for next/eslint-config-next/types.
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Berlin
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: deps
+      include: scope
+    groups:
+      next:
+        patterns:
+          - next
+          - eslint-config-next
+          - "@next/*"
+      react:
+        patterns:
+          - react
+          - react-dom
+          - "@types/react"
+          - "@types/react-dom"
+      types:
+        patterns:
+          - "@types/*"
+        exclude-patterns:
+          - "@types/react"
+          - "@types/react-dom"
+      lint:
+        patterns:
+          - eslint
+          - eslint-*
+          - "@eslint/*"
+
+  # GitHub Actions used in workflows
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: ci
