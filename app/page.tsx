@@ -30,20 +30,10 @@ export default function Home() {
           </span>
         </h1>
         <p className="hero-sub reveal reveal-d2">
-          Senior software engineer at{" "}
-          <a
-            className="link"
-            href="https://de.scalable.capital/en"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Scalable Capital
-          </a>
-          . I came to software from electrical engineering. Now I work across
-          the full stack and the infrastructure underneath: front to back,
-          infra included, whatever the problem needs. I also spend time
-          thinking about where the craft is heading, including what it means
-          to design and build for{" "}
+          I came to software from electrical engineering. Now I work across
+          the entire stack: front to back, infra included, whatever the
+          problem needs. What holds my attention more and more is where the
+          craft is heading: what it means to design and build with and for{" "}
           <span className="em" style={{ fontStyle: "italic" }}>
             agents
           </span>
