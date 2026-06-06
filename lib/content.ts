@@ -28,7 +28,7 @@ export const STACK = {
 };
 
 export const CURRENTLY = [
-  { label: "Building", text: "Full-stack platform work at Scalable Capital: design systems, performance, and developer experience." },
+  { label: "Building", text: "Payments investigations tooling at Scalable Capital: designing & shipping frontend, data layer, and backend services behind transactional workflows." },
   { label: "Teaching", text: "Frontend programming at the University of Europe for Applied Sciences." },
   { label: "Writing", text: "On Agent Experience (AX), and how interfaces change when the primary user is a model." },
   { label: "Exploring", text: "What it takes to design and build for agents, and what that asks of the systems behind them." },
