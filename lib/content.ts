@@ -258,7 +258,7 @@ export const PROJECTS: Project[] = [
     gallery: [
       {
         src: "/projects/ue-frontend/slides.png",
-        alt: "Session view: slides, starter code, and instructor notes for a single Saturday.",
+        alt: "Session view: learning objectives, session notes, and resources for a single Saturday.",
         aspect: "16 / 10",
       },
       {
